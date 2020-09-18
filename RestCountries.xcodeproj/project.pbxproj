@@ -3,10 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		773F12C62514DF8600080A29 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 773F12C52514DF8600080A29 /* Alamofire */; };
+		773F12CC2514E47C00080A29 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773F12CB2514E47C00080A29 /* Country.swift */; };
+		773F12CE2514E70400080A29 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773F12CD2514E70400080A29 /* NetworkManager.swift */; };
 		77487F902514CE5D001F1CC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77487F8F2514CE5D001F1CC1 /* AppDelegate.swift */; };
 		77487F942514CE5D001F1CC1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77487F932514CE5D001F1CC1 /* MainViewController.swift */; };
 		77487F992514CE60001F1CC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77487F982514CE60001F1CC1 /* Assets.xcassets */; };
@@ -14,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		773F12CB2514E47C00080A29 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		773F12CD2514E70400080A29 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		77487F8C2514CE5D001F1CC1 /* RestCountries.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RestCountries.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77487F8F2514CE5D001F1CC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		77487F932514CE5D001F1CC1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -27,12 +32,45 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				773F12C62514DF8600080A29 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		773F12C72514E3F000080A29 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				77487F8F2514CE5D001F1CC1 /* AppDelegate.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		773F12C82514E41F00080A29 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				77487F932514CE5D001F1CC1 /* MainViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		773F12C92514E43500080A29 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				773F12CB2514E47C00080A29 /* Country.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		773F12CA2514E44E00080A29 /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				773F12CD2514E70400080A29 /* NetworkManager.swift */,
+			);
+			path = NetworkManager;
+			sourceTree = "<group>";
+		};
 		77487F832514CE5D001F1CC1 = {
 			isa = PBXGroup;
 			children = (
@@ -52,8 +90,10 @@
 		77487F8E2514CE5D001F1CC1 /* RestCountries */ = {
 			isa = PBXGroup;
 			children = (
-				77487F8F2514CE5D001F1CC1 /* AppDelegate.swift */,
-				77487F932514CE5D001F1CC1 /* MainViewController.swift */,
+				773F12CA2514E44E00080A29 /* NetworkManager */,
+				773F12C92514E43500080A29 /* Model */,
+				773F12C72514E3F000080A29 /* AppDelegate */,
+				773F12C82514E41F00080A29 /* ViewController */,
 				77487F982514CE60001F1CC1 /* Assets.xcassets */,
 				77487F9A2514CE60001F1CC1 /* LaunchScreen.storyboard */,
 				77487F9D2514CE60001F1CC1 /* Info.plist */,
@@ -77,6 +117,9 @@
 			dependencies = (
 			);
 			name = RestCountries;
+			packageProductDependencies = (
+				773F12C52514DF8600080A29 /* Alamofire */,
+			);
 			productName = RestCountries;
 			productReference = 77487F8C2514CE5D001F1CC1 /* RestCountries.app */;
 			productType = "com.apple.product-type.application";
@@ -105,6 +148,9 @@
 				Base,
 			);
 			mainGroup = 77487F832514CE5D001F1CC1;
+			packageReferences = (
+				773F12C42514DF8600080A29 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = 77487F8D2514CE5D001F1CC1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -131,7 +177,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				773F12CE2514E70400080A29 /* NetworkManager.swift in Sources */,
 				77487F942514CE5D001F1CC1 /* MainViewController.swift in Sources */,
+				773F12CC2514E47C00080A29 /* Country.swift in Sources */,
 				77487F902514CE5D001F1CC1 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -320,6 +368,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		773F12C42514DF8600080A29 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.2.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		773F12C52514DF8600080A29 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 773F12C42514DF8600080A29 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 77487F842514CE5D001F1CC1 /* Project object */;
 }

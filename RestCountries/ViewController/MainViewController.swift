@@ -12,6 +12,8 @@ class MainViewController: UITableViewController {
     
     private let cellID = "cell"
     
+    private var countries: [Country] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
@@ -22,6 +24,11 @@ class MainViewController: UITableViewController {
         
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressed(sender:)))
         self.view.addGestureRecognizer(longPressRecognizer)
+        
+        NetWorkManager.fetchData { countriesList in
+            self.countries = countriesList
+            self.tableView.reloadData()
+        }
         
         
     }
@@ -57,11 +64,19 @@ class MainViewController: UITableViewController {
     
     @objc private func longPressed(sender: UILongPressGestureRecognizer) {
         print("Long Pressed tapped ")
+        //to get indexPath.row, because we have only sender in func params.
+        if sender.state == UIGestureRecognizer.State.began {
+            let touchPoint = sender.location(in: self.tableView)
+            if let indexPath = tableView.indexPathForRow(at: touchPoint){
+                basicActionSheet(title: countries[indexPath.row].name, message: countries[indexPath.row].capital)
+            }
+        }
+       
     }
     
     @objc private func infoItemTapped(){
         print("Info tapped")
-        basicAlert(title: "Info", message: "Hi! There!")
+        basicAlert(title: "Info", message: "Long press to open an action sheet, single tap on cell to open an alert.")
         
     }
     
@@ -69,16 +84,35 @@ class MainViewController: UITableViewController {
 
 extension MainViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return countries.count
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell  = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath as IndexPath)
         cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: cellID)
         
-        cell.textLabel?.text = "List"
-        cell.detailTextLabel?.text = "Name"
+        let country = countries[indexPath.row]
+        
+        cell.textLabel?.text = country.name
+        cell.detailTextLabel?.text = country.capital
+        
+        if let region = country.region {
+            cell.detailTextLabel?.text! += " from region: \(region)"
+        }
+        
         cell.selectionStyle = .none
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        basicAlert(title: countries[indexPath.row].region, message: "Capital of \(countries[indexPath.row].name ?? "") is \(countries[indexPath.row].capital ?? "").") // ?? "" is needed if there is nothing in the counntries name, otherwise will be error
+    }
+   
+    //animation
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+        UIView.animate(withDuration: 0.5) {
+            cell.transform = CGAffineTransform.identity
+        }
     }
 }
 
@@ -90,7 +124,17 @@ extension MainViewController {
             alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: nil))
             self.present(alert, animated: true)
         }
+    }
+    
+    func basicActionSheet(title: String?, message: String?){
+        
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+            self.present(alert, animated: true)
+        }
         
     }
+    
 }
 
